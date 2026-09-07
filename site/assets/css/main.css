@@ -238,9 +238,11 @@ footer.site .links { display: flex; flex-wrap: wrap; gap: 1.2rem; }
 .esgim .who-actions { display: flex; gap: .9rem; flex-wrap: wrap; margin-top: 1.4rem; }
 @media (max-width: 720px) { .esgim .who { grid-template-columns: 1fr; } .esgim .who img.portrait { width: 180px; height: 180px; } }
 
-.esgim .refs { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2.25rem; align-items: center; }
-.esgim .ref { border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: .5rem 1.1rem; font-size: .95rem; font-weight: 600; color: #fff; background: rgba(255,255,255,.03); }
-.esgim .ref span { font-weight: 400; color: var(--on-dark-muted); }
+.esgim .refs { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2.25rem; align-items: stretch; }
+.esgim .ref { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .55rem; border: 1px solid rgba(255,255,255,.18); border-radius: 14px; padding: 1rem 1.4rem; background: #fff; min-width: 170px; }
+.esgim .ref img { display: block; height: 38px; width: auto; }
+.esgim .ref span { font-size: .82rem; font-weight: 500; color: #5b6b7f; text-align: center; }
+@media (max-width: 520px) { .esgim .ref { flex: 1 1 100%; } }
 
 /* — Bande claire : la méthode — */
 .esgim .band-light { background: linear-gradient(180deg, #f6f9fc 0%, #eef3f8 100%); color: var(--ink); }

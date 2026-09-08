@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="{{ htmlLang | default('fr') }}">
+<head>
+{% include "partials/head.njk" %}
+{%- if jsonldBlocks %}
+<script type="application/ld+json">{{ jsonldBlocks | safe }}</script>
+{%- endif %}
+</head>
+<body class="esgim">
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header class="esgim-head">
+  <div class="wrap bar">
+    <a class="brand" href="/fr/" aria-label="SOS EcoVadis — accueil">
+      <img src="/assets/img/esgim-logo-blanc.png" alt="ESG Interim Management" width="150" height="32" decoding="async">
+    </a>
+    <a class="nav-cta" href="{{ cta.url.nav }}" data-utm-term="nav"
+       target="_blank" rel="noopener">Réserver {{ cta.duree }}</a>
+  </div>
+</header>
+
+<main id="contenu">
+{{ content | safe }}
+</main>
+
+<footer class="esgim-foot">
+  <div class="wrap">
+    <div class="cols">
+      <img src="/assets/img/esgim-logo-blanc.png" alt="ESG Interim Management" width="131" height="28" decoding="async">
+      <p class="links">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/sujets/">Le catalogue</a>
+        <a href="https://esgim.eu/a-propos">Qui sommes-nous</a>
+        <a href="/fr/mentions-legales/">Mentions légales</a>
+      </p>
+    </div>
+    {% include "partials/mentions.njk" %}
+  </div>
+</footer>
+
+{% include "partials/consentement.njk" %}
+<script src="/assets/js/landing.js" defer></script>
+<script src="/assets/js/tracking.js" defer></script>
+{%- if tarifs %}
+<script src="/assets/js/tarifs.js" defer></script>
+{%- endif %}
+</body>
+</html>

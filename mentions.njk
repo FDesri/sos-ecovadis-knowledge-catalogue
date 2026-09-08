@@ -1,0 +1,16 @@
+{#- Mentions obligatoires. Mêmes mots sur TOUTES les pages du site,
+    catalogue compris (spec de l'étape 2, §Mentions et pied de page).
+    `mentionsSansContact` retire l'e-mail et le lien LinkedIn : demandé
+    pour la landing FR seule, le catalogue garde son pied de page. -#}
+<div class="mentions">
+  <p>SOS EcoVadis est un service d'ESG Interim Management. Ce site n'est ni édité, ni
+  affilié, ni approuvé par EcoVadis SAS. EcoVadis est une marque appartenant à son titulaire.</p>
+  <p>
+  {%- if not mentionsSansContact %}
+    <a href="mailto:fd@esgim.eu">fd@esgim.eu</a> ·
+    <a href="https://www.linkedin.com/in/francoisdequenne/" rel="me">LinkedIn</a> ·
+  {%- endif %}
+    <a href="{{ site.license.url }}" rel="license">{{ site.license.name }}</a> ·
+    <a href="/fr/mentions-legales/">Mentions légales</a>
+  </p>
+</div>

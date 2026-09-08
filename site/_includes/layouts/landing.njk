@@ -41,5 +41,8 @@
 {% include "partials/consentement.njk" %}
 <script src="/assets/js/landing.js" defer></script>
 <script src="/assets/js/tracking.js" defer></script>
+{%- if tarifs %}
+<script src="/assets/js/tarifs.js" defer></script>
+{%- endif %}
 </body>
 </html>

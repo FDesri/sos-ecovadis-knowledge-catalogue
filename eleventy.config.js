@@ -33,6 +33,10 @@ export default function (eleventyConfig) {
     // arrivés à la racine. Ancrés par "./", ils n'atteignent pas leurs
     // homonymes légitimes dans site/.
     "./404.njk", "./base.njk", "./head.njk", "./index.njk",
+    // Deuxième vague de résidus, arrivée avec la landing de l'étape 2 ter :
+    // les fichiers ont été déposés à la racine au lieu de site/. Les copies
+    // qui font foi sont sous site/ ; celles-ci sont inertes une fois ignorées.
+    "./fr-landing.njk", "./landing.njk", "./mentions.njk",
   ]) eleventyConfig.ignores.add(p);
 
   // Les fiches du catalogue : gabarit, URL et données dérivées. Tout est ici

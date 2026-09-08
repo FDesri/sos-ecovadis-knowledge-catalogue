@@ -12,7 +12,7 @@ const DEFAUTS = {
 };
 
 // Un utm_term par contexte de CTA (§Technique du spec de l'étape 2).
-const TERMES = ["nav", "hero", "cta-final"];
+const TERMES = ["nav", "hero", "prix", "cta-final"];
 
 const lien = (terme) => {
   const p = new URLSearchParams({ ...DEFAUTS, utm_term: terme });

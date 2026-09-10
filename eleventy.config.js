@@ -79,6 +79,7 @@ function ldCollection({ url, lang, name, description, items }) {
 // « qui accompagne une PME belge sur EcoVadis ». Aucun prix ici : ils vivent
 // dans les fiches tarifs, une seule source evite la derive.
 function ldLanding({ url, lang, name, description }) {
+  const img = `${site.url}/assets/img/og-${lang}.jpg`;
   return ldJson([
     {
       "@type": "WebPage",
@@ -90,6 +91,15 @@ function ldLanding({ url, lang, name, description }) {
       isPartOf: { "@id": `${site.url}/#website` },
       about: ORG,
       publisher: ORG,
+      primaryImageOfPage: { "@id": `${img}#image` },
+    },
+    {
+      "@type": "ImageObject",
+      "@id": `${img}#image`,
+      url: img,
+      contentUrl: img,
+      width: 1200,
+      height: 630,
     },
     {
       "@type": "Service",

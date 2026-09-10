@@ -17,7 +17,15 @@
 <meta property="og:description" content="{{ description }}">
 <meta property="og:url" content="{{ site.url }}{{ page.url }}">
 <meta property="og:locale" content="{{ htmlLang }}">
-<meta name="twitter:card" content="summary">
+{#- Image de partage : une par langue. Les fiches trilingues (lang mul)
+    retombent sur le français, langue par défaut du plan d'URL. #}
+{%- set ogLang = htmlLang if htmlLang == "fr" or htmlLang == "nl" or htmlLang == "en" else "fr" %}
+<meta property="og:image" content="{{ site.url }}/assets/img/og-{{ ogLang }}.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ title }} — {{ site.publisher }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ site.url }}/assets/img/og-{{ ogLang }}.jpg">
 <meta name="author" content="{{ site.author }}">
 <link rel="icon" href="/assets/img/favicon.png" type="image/png">
 <link rel="stylesheet" href="/assets/css/main.css">

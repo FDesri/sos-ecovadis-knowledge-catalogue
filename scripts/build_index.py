@@ -495,6 +495,19 @@ Sitemap: {base}/sitemap.xml
 
     # --- sitemap.xml (KC-T06) ---------------------------------------------
     urls = []
+    # Pages du rendu : accueil de langue et index des sujets. Ce sont des
+    # gabarits Eleventy, pas des objets du catalogue : ni la boucle des hubs
+    # ni celle des fiches ne les voit. Sans cette entree, les trois pages qui
+    # convertissent sont les seules absentes du sitemap (CHANGELOG 2.1.0,
+    # annonce le 01/09/2026 mais jamais implementee ; constate le 10/09/2026).
+    # lastmod deterministe : la fiche publiee la plus recente, et non la date
+    # du jour, pour qu'une regeneration sans changement de contenu ne signale
+    # pas une modification fictive.
+    newest = max((str(objects[o]["date_updated"]) for o in published_ids),
+                 default=str(datetime.date.today()))
+    for l in LANGS:
+        urls.append((f"{base}/{l}/", newest))
+        urls.append((f"{base}/{l}/{urlplan['branches']['hub'][l]}/", newest))
     for h in sorted(hub_defs):
         if any(oid in published_ids for oid in hub_members[h]):
             for l in LANGS:

@@ -19,9 +19,19 @@ const lien = (terme) => {
   return `${BASE}?${p.toString()}`;
 };
 
+// Le prix et la durée tels qu'ils s'écrivent dans chaque langue. `prix` et
+// `duree` restent les valeurs françaises : la page /fr/mentions-legales/ les
+// lit encore sous ce nom.
+const T = {
+  fr: { prix: "125 € HTVA", duree: "30 minutes" },
+  nl: { prix: "125 € excl. btw", duree: "30 minuten" },
+  en: { prix: "€125 excl. VAT", duree: "30 minutes" },
+};
+
 export default {
   base: BASE,
-  prix: "125 € HTVA",
-  duree: "30 minutes",
+  prix: T.fr.prix,
+  duree: T.fr.duree,
+  t: T,
   url: Object.fromEntries(TERMES.map((t) => [t, lien(t)])),
 };

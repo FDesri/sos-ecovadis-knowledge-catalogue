@@ -8,20 +8,60 @@
  * L'échéancier 20 / 60 / 20 porte UNIQUEMENT sur le forfait
  * d'accompagnement. L'abonnement Premium EcoVadis en est exclu : il est
  * facturé par EcoVadis, pas par ESGIM.
+ *
+ * Trois langues : la langue de la page (<html lang>) choisit le format des
+ * nombres (7 500 / 7.500 / 7,500) et le texte annoncé au lecteur d'écran.
  */
 (function () {
   "use strict";
 
   var FORFAITS = {
-    XS: { forfait: 7500, abo: 899, plage: "jusqu'à 25 employés" },
-    S: { forfait: 9000, abo: 1219, plage: "26 à 99 employés" },
-    M: { forfait: 12000, abo: 1949, plage: "100 à 999 employés" },
+    XS: { forfait: 7500, abo: 899 },
+    S: { forfait: 9000, abo: 1219 },
+    M: { forfait: 12000, abo: 1949 },
+  };
+
+  var LANGUES = {
+    fr: {
+      locale: "fr-FR",
+      plage: { XS: "jusqu'à 25 employés", S: "26 à 99 employés", M: "100 à 999 employés" },
+      dire: function (t, f, p, v) {
+        return "Entreprise " + t + ", " + p + ". Accompagnement : " + f(v.forfait) +
+          " euros hors TVA. Abonnement Premium en supplément : " + f(v.abo) +
+          " euros. Versements : " + f(v.v1) + " euros à la commande, " + f(v.v2) +
+          " euros à la soumission et " + f(v.v3) +
+          " euros uniquement à l'obtention de la médaille.";
+      },
+    },
+    nl: {
+      locale: "nl-BE",
+      plage: { XS: "tot 25 werknemers", S: "26 tot 99 werknemers", M: "100 tot 999 werknemers" },
+      dire: function (t, f, p, v) {
+        return "Onderneming " + t + ", " + p + ". Begeleiding: " + f(v.forfait) +
+          " euro exclusief btw. Premium-abonnement, apart: " + f(v.abo) +
+          " euro. Betalingen: " + f(v.v1) + " euro bij bestelling, " + f(v.v2) +
+          " euro bij indiening en " + f(v.v3) +
+          " euro enkel wanneer u de medaille behaalt.";
+      },
+    },
+    en: {
+      locale: "en-US",
+      plage: { XS: "up to 25 employees", S: "26 to 99 employees", M: "100 to 999 employees" },
+      dire: function (t, f, p, v) {
+        return "Company size " + t + ", " + p + ". Support package: " + f(v.forfait) +
+          " euros excluding VAT. Premium subscription, billed separately: " + f(v.abo) +
+          " euros. Payments: " + f(v.v1) + " euros on order, " + f(v.v2) +
+          " euros on submission and " + f(v.v3) +
+          " euros only when you earn the medal.";
+      },
+    },
   };
 
   var boutons = document.querySelectorAll('input[name="taille"]');
   if (!boutons.length) return;
 
-  var nombre = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+  var langue = LANGUES[(document.documentElement.lang || "fr").slice(0, 2)] || LANGUES.fr;
+  var nombre = new Intl.NumberFormat(langue.locale, { maximumFractionDigits: 0 });
   var fmt = function (v) { return nombre.format(v); };
   var annonce = document.getElementById("tarifs-annonce");
 
@@ -41,12 +81,7 @@
     });
 
     if (dire && annonce) {
-      annonce.textContent =
-        "Entreprise " + taille + ", " + f.plage + ". Accompagnement : " +
-        fmt(f.forfait) + " euros hors TVA. Abonnement Premium en supplément : " +
-        fmt(f.abo) + " euros. Versements : " + fmt(v1) + " euros à la commande, " +
-        fmt(v2) + " euros à la soumission et " + fmt(v3) +
-        " euros uniquement à l'obtention de la médaille.";
+      annonce.textContent = langue.dire(taille, fmt, langue.plage[taille], valeurs);
     }
   }
 

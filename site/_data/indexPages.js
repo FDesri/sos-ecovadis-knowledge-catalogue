@@ -4,21 +4,20 @@ import { urlplan } from "../lib/urls.js";
 
 const ORDER = ["fr", "nl", "en"];
 
-// Étape 2 : /fr/ est passé à la landing. L'accueil du catalogue français
-// bascule tel quel vers /fr/sujets/, qui listait déjà les mêmes sujets.
-// /nl/ et /en/ gardent leur accueil de catalogue tant qu'il n'y a pas de
-// landing traduite (spec de l'étape 2, hors périmètre).
-const HOME_LANGS = ["nl", "en"];
+// Étape 2 : /fr/ est passé à la landing ; l'accueil du catalogue français
+// a basculé vers /fr/sujets/. Étape 2 quater : /nl/ et /en/ passent à leur
+// tour à la landing traduite. Il ne reste donc aucun accueil de catalogue
+// rendu par lang-home.njk — la liste est vide, le gabarit reste en place
+// pour le jour où une langue sans landing serait ajoutée.
+const HOME_LANGS = [];
 
-// L'équivalent français d'un accueil de catalogue est désormais /fr/sujets/ :
-// c'est vers là que pointent l'alternative hreflang et le sélecteur de langue,
-// pas vers la landing, qui n'a pas de version traduite.
+// L'équivalent d'un accueil de catalogue est désormais l'index des sujets
+// de chaque langue : c'est vers là que pointent l'alternative hreflang et
+// le sélecteur de langue des pages du catalogue. Les trois landings se
+// déclarent entre elles dans leur propre front matter.
 const topicAlt = Object.fromEntries(ORDER.map((x) => [x, `/${x}/${urlplan.branches.hub[x]}/`]));
-const homeAlt = Object.fromEntries(
-  ORDER.map((x) => [x, x === "fr" ? topicAlt.fr : `/${x}/`]),
-);
 
 export default {
-  home: HOME_LANGS.map((l) => ({ lang: l, url: `/${l}/`, alt: homeAlt })),
+  home: HOME_LANGS.map((l) => ({ lang: l, url: `/${l}/`, alt: topicAlt })),
   topics: ORDER.map((l) => ({ lang: l, url: `/${l}/${urlplan.branches.hub[l]}/`, alt: topicAlt })),
 };

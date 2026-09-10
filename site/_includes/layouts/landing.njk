@@ -1,5 +1,7 @@
+{%- set L = htmlLang | default('fr') -%}
+{%- set t = i18n[L].landing -%}
 <!doctype html>
-<html lang="{{ htmlLang | default('fr') }}">
+<html lang="{{ L }}">
 <head>
 {% include "partials/head.njk" %}
 {%- if jsonldBlocks %}
@@ -7,15 +9,28 @@
 {%- endif %}
 </head>
 <body class="esgim">
-<a class="skip" href="#contenu">Aller au contenu</a>
+<a class="skip" href="#contenu">{{ i18n[L].skip }}</a>
 
 <header class="esgim-head">
   <div class="wrap bar">
-    <a class="brand" href="/fr/" aria-label="SOS EcoVadis — accueil">
+    <a class="brand" href="/{{ L }}/" aria-label="{{ t.brand_label }}">
       <img src="/assets/img/esgim-logo-blanc.png" alt="ESG Interim Management" width="150" height="32" decoding="async">
     </a>
-    <a class="nav-cta" href="{{ cta.url.nav }}" data-utm-term="nav"
-       target="_blank" rel="noopener">Réserver {{ cta.duree }}</a>
+    <div class="bar-right">
+      {%- if altUrls and (altUrls | length) > 1 %}
+      <nav class="langs" aria-label="{{ i18n[L].other_langs }}">
+        {%- for l in site.langs %}
+          {%- if l == L %}
+        <span aria-current="true">{{ l | upper }}</span>
+          {%- elif altUrls[l] %}
+        <a href="{{ altUrls[l] }}" hreflang="{{ l }}" lang="{{ l }}">{{ l | upper }}</a>
+          {%- endif %}
+        {%- endfor %}
+      </nav>
+      {%- endif %}
+      <a class="nav-cta" href="{{ cta.url.nav }}" data-utm-term="nav"
+         target="_blank" rel="noopener">{{ t.nav_book }} {{ cta.t[L].duree }}</a>
+    </div>
   </div>
 </header>
 
@@ -28,12 +43,23 @@
     <div class="cols">
       <img src="/assets/img/esgim-logo-blanc.png" alt="ESG Interim Management" width="131" height="28" decoding="async">
       <p class="links">
-        <a href="/fr/">Accueil</a>
-        <a href="/fr/sujets/">Le catalogue</a>
-        <a href="https://esgim.eu/a-propos">Qui sommes-nous</a>
-        <a href="/fr/mentions-legales/">Mentions légales</a>
+        <a href="/{{ L }}/">{{ t.home }}</a>
+        <a href="/{{ L }}/{{ kb.branches.hub[L] }}/">{{ t.catalogue }}</a>
+        <a href="{{ site.aboutUrl }}">{{ t.who }}</a>
+        <a href="{{ t.legal_url }}">{{ t.legal }}</a>
       </p>
     </div>
+    {%- if altUrls and (altUrls | length) > 1 %}
+    <nav class="langs" aria-label="{{ i18n[L].other_langs }}">
+      {%- for l in site.langs %}
+        {%- if l == L %}
+      <span aria-current="true">{{ l | upper }}</span>
+        {%- elif altUrls[l] %}
+      <a href="{{ altUrls[l] }}" hreflang="{{ l }}" lang="{{ l }}">{{ l | upper }}</a>
+        {%- endif %}
+      {%- endfor %}
+    </nav>
+    {%- endif %}
     {% include "partials/mentions.njk" %}
   </div>
 </footer>

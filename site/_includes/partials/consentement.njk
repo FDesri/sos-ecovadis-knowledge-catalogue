@@ -1,14 +1,16 @@
 {#- Bandeau de consentement : ÉCRIT, INERTE. Il reste caché tant que
-    site/assets/js/tracking.js porte ACTIF = false (étape 5). -#}
+    site/assets/js/tracking.js porte ACTIF = false (étape 5).
+    Texte dans la langue de la page, depuis i18n[lang].landing. -#}
+{%- set cl = htmlLang | default('fr') -%}
+{%- set ct = i18n[cl].landing -%}
 <div class="consent" id="consentement" role="dialog" aria-live="polite"
-     aria-label="Consentement aux cookies de mesure" hidden>
+     aria-label="{{ ct.consent_label }}" hidden>
   <div class="wrap inner">
-    <p>Nous aimerions déposer des cookies de mesure HubSpot pour savoir quelles pages
-    sont lues. Rien n'est déposé sans votre accord. Détail sur la page
-    <a href="/fr/mentions-legales/">mentions légales</a>.</p>
+    <p>{{ ct.consent_text }}
+    <a href="{{ ct.legal_url }}">{{ ct.consent_link }}</a>.</p>
     <div class="acts">
-      <button type="button" class="ok" data-consent="oui">Accepter</button>
-      <button type="button" data-consent="non">Refuser</button>
+      <button type="button" class="ok" data-consent="oui">{{ ct.consent_yes }}</button>
+      <button type="button" data-consent="non">{{ ct.consent_no }}</button>
     </div>
   </div>
 </div>

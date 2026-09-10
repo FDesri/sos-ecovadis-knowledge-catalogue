@@ -58,5 +58,4 @@ Hij werkt dus als interim manager: hij neemt het traject van begin tot einde in 
 
 ## Contact
 
-- LinkedIn: [linkedin.com/in/francoisdequenne](https://www.linkedin.com/in/francoisdequenne/)
 - Het voltallige ESGIM-team: [esgim.eu/a-propos](https://esgim.eu/a-propos)

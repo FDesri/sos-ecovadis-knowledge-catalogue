@@ -37,6 +37,12 @@ export default function (eleventyConfig) {
     // les fichiers ont été déposés à la racine au lieu de site/. Les copies
     // qui font foi sont sous site/ ; celles-ci sont inertes une fois ignorées.
     "./fr-landing.njk", "./landing.njk", "./mentions.njk",
+    // Troisième vague de résidus (téléversements web) : légales déposées à la
+    // racine + doublons de fiches catalogue. Ignorés ici pour que le build et
+    // le check restent verts même s'ils subsistent dans le dépôt.
+    "./en-legal-notice.njk", "./fr-mentions-legales.njk", "./nl-wettelijke-vermeldingen.njk",
+    "./esgim.md", "./esgim \\(2\\).md", "./esgim \\(4\\).md",
+    "./francois-dequenne.md", "./francois-dequenne \\(1\\).md", "./francois-dequenne \\(3\\).md",
   ]) eleventyConfig.ignores.add(p);
 
   // Les fiches du catalogue : gabarit, URL et données dérivées. Tout est ici

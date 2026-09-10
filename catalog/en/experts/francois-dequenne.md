@@ -57,5 +57,4 @@ He therefore works as an interim manager: he takes charge of the journey end to 
 
 ## Contact
 
-- LinkedIn: [linkedin.com/in/francoisdequenne](https://www.linkedin.com/in/francoisdequenne/)
 - The full ESGIM team: [esgim.eu/a-propos](https://esgim.eu/a-propos)

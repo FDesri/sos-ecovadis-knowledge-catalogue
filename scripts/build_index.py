@@ -392,7 +392,6 @@ def main():
             "postalCode": "1170", "addressLocality": "Watermael-Boitsfort",
             "addressRegion": "Bruxelles-Capitale", "addressCountry": "BE",
         },
-        "email": "fd@esgim.eu",
         "url": "https://esgim.eu/",
         "sameAs": ["https://esgim.eu/", "https://esgim.eu/legal"],
         "areaServed": [{"@type": "Country", "name": "Belgium"},

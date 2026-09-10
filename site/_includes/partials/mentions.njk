@@ -1,17 +1,12 @@
 {#- Mentions obligatoires. Mêmes mots sur TOUTES les pages du site,
     catalogue compris (spec de l'étape 2, §Mentions et pied de page) —
     dans la langue de la page, depuis i18n[lang].landing.
-    `mentionsSansContact` retire l'e-mail et le lien LinkedIn : demandé
-    pour les landings seules, le catalogue garde son pied de page. -#}
+    Ni e-mail ni lien LinkedIn dans le pied de page (retirés partout). -#}
 {%- set ml = htmlLang | default('fr') -%}
 {%- set mt = i18n[ml].landing -%}
 <div class="mentions">
   <p>{{ mt.mentions }}</p>
   <p>
-  {%- if not mentionsSansContact %}
-    <a href="mailto:fd@esgim.eu">fd@esgim.eu</a> ·
-    <a href="https://www.linkedin.com/in/francoisdequenne/" rel="me">LinkedIn</a> ·
-  {%- endif %}
     <a href="{{ site.license.url }}" rel="license">{{ site.license.name }}</a> ·
     <a href="{{ mt.legal_url }}">{{ mt.legal }}</a>
   </p>

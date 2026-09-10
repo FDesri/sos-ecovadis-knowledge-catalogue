@@ -180,8 +180,6 @@ footer.site .links { display: flex; flex-wrap: wrap; gap: 1.2rem; }
 .esgim-head { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(0,27,54,.62); border-bottom: 1px solid rgba(255,255,255,.06); }
 .esgim-head .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .9rem; }
 .esgim-head img { display: block; height: 32px; width: auto; }
-.esgim .nav-cta { font-weight: 600; color: #fff; background: var(--grad-brand); padding: .6rem 1.1rem; border-radius: 12px; white-space: nowrap; font-size: .95rem; }
-.esgim .nav-cta:hover { text-decoration: none; }
 /* Sélecteur de langue des landings : mêmes classes que le catalogue,
    recolorées pour l'en-tête sombre. */
 .esgim-head .bar-right { display: flex; align-items: center; gap: .9rem; }

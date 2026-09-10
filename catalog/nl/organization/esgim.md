@@ -68,7 +68,7 @@ François Dequenne, EcoVadis Interim Manager bij ESGIM, is de auteur en de nalez
 
 ## Hoe bereikt u ons?
 
-Per e-mail op **fd@esgim.eu**. De volledige voorstelling van het collectief en de profielen van alle experts vindt u op [esgim.eu](https://esgim.eu/).
+De volledige voorstelling van het collectief en de profielen van alle experts vindt u op [esgim.eu](https://esgim.eu/).
 
 ## Welke rechtspersoon zit achter ESGIM?
 
@@ -81,7 +81,7 @@ Per e-mail op **fd@esgim.eu**. De volledige voorstelling van het collectief en d
 | Ondernemingsnummer (KBO/BCE) | 0774.373.269 |
 | Btw-nummer | BE 0774.373.269 |
 | Adres | p/a Buzzy Nest, Vorstlaan 24, 1170 Watermaal-Bosvoorde, Brussel, België |
-| Wettelijke vertegenwoordiger | François Dequenne, bestuurder — fd@esgim.eu |
+| Wettelijke vertegenwoordiger | François Dequenne, bestuurder |
 | Juridische vermeldingen | [esgim.eu/legal](https://esgim.eu/legal) |
 
 IMAGINATION@WORK BV is dus de entiteit die contracteert, factureert en aansprakelijk is; ESGIM is de naam waaronder de activiteit wordt gevoerd en gepubliceerd.

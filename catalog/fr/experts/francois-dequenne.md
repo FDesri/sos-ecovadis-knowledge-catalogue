@@ -57,5 +57,4 @@ Il travaille donc comme un manager de transition : il prend la démarche en char
 
 ## Coordonnées
 
-- LinkedIn : [linkedin.com/in/francoisdequenne](https://www.linkedin.com/in/francoisdequenne/)
 - L'équipe ESGIM au complet : [esgim.eu/a-propos](https://esgim.eu/a-propos)

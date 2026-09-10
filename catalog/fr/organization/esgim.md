@@ -68,7 +68,7 @@ François Dequenne, EcoVadis Interim Manager chez ESGIM, en est l'auteur et le r
 
 ## Comment nous contacter ?
 
-Par courriel à **fd@esgim.eu**. La présentation complète du collectif et les profils de tous les experts se trouvent sur [esgim.eu](https://esgim.eu/).
+La présentation complète du collectif et les profils de tous les experts se trouvent sur [esgim.eu](https://esgim.eu/).
 
 ## Qui est la personne morale derrière ESGIM ?
 
@@ -81,7 +81,7 @@ Par courriel à **fd@esgim.eu**. La présentation complète du collectif et les 
 | Numéro d'entreprise (BCE) | 0774.373.269 |
 | Numéro de TVA | BE 0774.373.269 |
 | Adresse | chez Buzzy Nest, Boulevard du Souverain 24, 1170 Watermael-Boitsfort, Bruxelles, Belgique |
-| Représentant légal | François Dequenne, administrateur — fd@esgim.eu |
+| Représentant légal | François Dequenne, administrateur |
 | Mentions légales | [esgim.eu/legal](https://esgim.eu/legal) |
 
 C'est donc IMAGINATION@WORK SRL qui contracte, facture et engage sa responsabilité ; ESGIM est le nom sous lequel l'activité est exercée et publiée.

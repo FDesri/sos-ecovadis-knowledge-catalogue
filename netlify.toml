@@ -26,18 +26,39 @@
 # Redirections
 # ------------------------------------------------------------
 
-# Racine → français (langue par défaut du plan d'URL).
+# 1. Domaine unique. En premier, pour que le sous-domaine Netlify parte
+#    directement vers le domaine définitif, sans rebond intermédiaire.
 [[redirects]]
   from = "https://sos-ecovadis.netlify.app/*"
   to = "https://sos-ecovadis.com/:splat"
   status = 301
   force = true
 
-# QR codes imprimés. Un seul jeu de règles : /q/<code> ouvre la landing FR,
-# /q/<langue>/<code> la landing de cette langue, et le code imprimé devient
-# utm_campaign. Ajouter un support ne demande donc aucun déploiement.
-# 302 volontaire : un 301 se grave dans le navigateur, et un QR imprimé doit
-# rester réorientable.
+# 2. Racine → langue du visiteur, français par défaut.
+#    302 volontaire : la destination varie selon le visiteur, un 301 en
+#    figerait une seule dans le cache de tous les navigateurs.
+[[redirects]]
+  from = "/"
+  to = "/nl/"
+  status = 302
+  conditions = {Language = ["nl"]}
+
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 302
+  conditions = {Language = ["en"]}
+
+[[redirects]]
+  from = "/"
+  to = "/fr/"
+  status = 302
+
+# 3. QR codes imprimés. Un seul jeu de règles : /q/<code> ouvre la landing FR,
+#    /q/<langue>/<code> la landing de cette langue, et le code imprimé devient
+#    utm_campaign. Ajouter un support ne demande donc aucun déploiement.
+#    302 volontaire : un 301 se grave dans le navigateur, et un QR imprimé doit
+#    rester réorientable.
 [[redirects]]
   from = "/q/:langue/:code"
   to = "/:langue/?utm_source=qr&utm_medium=print&utm_campaign=:code"
@@ -50,7 +71,7 @@
   status = 302
   force = true
 
-# Le glossaire est trilingue : une seule page, une seule canonique.
+# 4. Le glossaire est trilingue : une seule page, une seule canonique.
 [[redirects]]
   from = "/nl/woordenlijst/*"
   to = "/fr/glossaire/"

@@ -27,6 +27,55 @@
 
   var entrantes = new URLSearchParams(window.location.search);
 
+  /* Détection des assistants conversationnels.
+   *
+   * Deux signaux, jamais contradictoires avec D39 : on ne remplit que ce qui
+   * est absent. ChatGPT écrit lui-même utm_source=chatgpt.com ; il arrive donc
+   * en UTM entrante et prime, on se contente d'ajouter le medium manquant.
+   * Les autres assistants ne laissent qu'un referrer : quand aucune source
+   * n'est déclarée, il devient la source.
+   *
+   * Referrer-Policy vaut strict-origin-when-cross-origin : on ne reçoit que
+   * l'origine, ce qui suffit — et beaucoup d'assistants n'envoient rien du
+   * tout. Un LLM non détecté retombe simplement sur les défauts.
+   */
+  var ASSISTANTS = [
+    ["chatgpt.com", "chatgpt"],
+    ["chat.openai.com", "chatgpt"],
+    ["openai.com", "chatgpt"],
+    ["perplexity.ai", "perplexity"],
+    ["claude.ai", "claude"],
+    ["gemini.google.com", "gemini"],
+    ["copilot.microsoft.com", "copilot"],
+    ["you.com", "you"],
+    ["mistral.ai", "mistral"],
+    ["poe.com", "poe"],
+    ["grok.com", "grok"]
+  ];
+
+  function assistantDe(valeur) {
+    if (!valeur) return null;
+    var v = String(valeur).toLowerCase();
+    for (var i = 0; i < ASSISTANTS.length; i++) {
+      if (v.indexOf(ASSISTANTS[i][0]) !== -1) return ASSISTANTS[i][1];
+    }
+    return null;
+  }
+
+  var source = entrantes.get("utm_source");
+  if (source) {
+    // Source déclarée : on la garde telle quelle. Si c'est un assistant et
+    // que le medium manque, on le nomme.
+    var nomme = assistantDe(source);
+    if (nomme && !entrantes.get("utm_medium")) entrantes.set("utm_medium", "llm");
+  } else {
+    var venu = assistantDe(document.referrer);
+    if (venu) {
+      entrantes.set("utm_source", venu);
+      entrantes.set("utm_medium", "llm");
+    }
+  }
+
   // La fonction de calcul, unique. `terme` est le contexte du CTA.
   function utmPour(terme) {
     var out = {};

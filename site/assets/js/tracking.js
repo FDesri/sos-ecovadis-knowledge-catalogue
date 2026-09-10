@@ -1,21 +1,20 @@
-/* Suivi HubSpot et bandeau de consentement — ÉCRITS, INERTES.
+/* Suivi HubSpot et bandeau de consentement.
  *
- * Rien ne s'allume tant que ACTIF vaut false. C'est voulu : sur
- * sos-ecovadis.netlify.app, le suivi ne compterait rien, et le domaine
- * sos-ecovadis.com n'est pas encore branché. Bascule à l'étape 5, quand
- * le domaine est en place et que HubSpot connaît ce domaine.
+ * Le script HubSpot n'est chargé qu'après un « oui » explicite : opt-in,
+ * comme le veut la règle belge. Un « non » est mémorisé et respecté.
  *
- * Pour allumer, à l'étape 5 :
- *   1. passer ACTIF à true ;
- *   2. dans HubSpot, Réglages → Confidentialité → Cookies, activer
- *      l'opt-in européen et ajouter sos-ecovadis.com aux domaines suivis.
- * La CSP de netlify.toml autorise déjà js.hs-scripts.com et js.hs-banner.com :
- * il n'y a rien à y toucher.
+ * Côté HubSpot, une seule chose à faire : ajouter sos-ecovadis.com aux
+ * domaines suivis. Laisser le bandeau HubSpot désactivé — le site porte
+ * le sien, et deux bandeaux valent moins que zéro.
  */
 (function () {
   "use strict";
 
-  var ACTIF = false;
+  // Le suivi s'allume tout seul sur le domaine réel, et seulement là :
+  // sur sos-ecovadis.netlify.app et sur les prévisualisations, il ne
+  // compterait rien d'utile. Il n'y a donc aucune bascule à faire le jour
+  // de la mise en ligne — brancher le DNS suffit.
+  var ACTIF = /(^|\.)sos-ecovadis\.com$/.test(window.location.hostname);
   var PORTAIL = "9391878";
   var CLE = "sos-ecovadis-consentement";
 

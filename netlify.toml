@@ -28,8 +28,8 @@
 
 # Racine → français (langue par défaut du plan d'URL).
 [[redirects]]
-  from = "/"
-  to = "/fr/"
+  from = "https://sos-ecovadis.netlify.app/*"
+  to = "https://sos-ecovadis.com/:splat"
   status = 301
   force = true
 

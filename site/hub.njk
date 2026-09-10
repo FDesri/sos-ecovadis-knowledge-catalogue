@@ -8,6 +8,13 @@
     htmlLang: (d) => d.hp.lang,
     description: (d) => `${d.hp.members.length} ${d.i18n[d.hp.lang].sheets} — ${d.hp.title}`,
     altUrls: (d) => d.hp.alt,
+    jsonldBlocks: (d) => d.ld.collection({
+      url: d.hp.url,
+      lang: d.hp.lang,
+      name: d.hp.title,
+      description: `${d.hp.members.length} ${d.i18n[d.hp.lang].sheets} — ${d.hp.title}`,
+      items: d.hp.members,
+    }),
   }
 }
 ---

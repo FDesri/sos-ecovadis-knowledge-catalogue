@@ -7,6 +7,7 @@
 
 import kb from "./site/_data/kb.js";
 import { pathFor } from "./site/lib/urls.js";
+import site from "./site/_data/site.js";
 
 const lang = (d) => (d.lang === "mul" ? "fr" : d.lang);
 
@@ -18,6 +19,91 @@ function ldGraph(id, l) {
     "@context": "https://schema.org",
     "@graph": [rest, kb.jsonld.organization, kb.jsonld.person],
   }).replace(/</g, "\\u003c");
+}
+
+// --- JSON-LD des pages de rendu -------------------------------------------
+// Les fiches recoivent leur graphe de index/jsonld.json (ldGraph ci-dessus).
+// Les hubs, index de sujets et landings ne sont pas des objets du catalogue :
+// leur graphe se compose ici, a partir des memes noeuds Organization et
+// Person, pour qu'un seul @id designe l'editeur sur tout le site.
+const abs = (u) => (u.startsWith("http") ? u : site.url + u);
+const ORG = { "@id": kb.jsonld.organization["@id"] };
+
+const ldJson = (graph) =>
+  JSON.stringify({ "@context": "https://schema.org", "@graph": graph })
+    .replace(/</g, "\u003c");
+
+function wsNode(lang) {
+  return {
+    "@type": "WebSite",
+    "@id": `${site.url}/#website`,
+    url: `${site.url}/`,
+    name: site.name,
+    description: site.tagline[lang],
+    inLanguage: lang,
+    publisher: ORG,
+    ...(site.license && site.license.url ? { license: site.license.url } : {}),
+  };
+}
+
+// Hub et index des sujets : une page qui liste des fiches.
+function ldCollection({ url, lang, name, description, items }) {
+  return ldJson([
+    {
+      "@type": "CollectionPage",
+      "@id": abs(url),
+      url: abs(url),
+      name,
+      description,
+      inLanguage: lang,
+      isPartOf: { "@id": `${site.url}/#website` },
+      publisher: ORG,
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: items.length,
+        itemListElement: items.map((m, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: abs(m.url),
+          name: m.title,
+        })),
+      },
+    },
+    wsNode(lang),
+    kb.jsonld.organization,
+    kb.jsonld.person,
+  ]);
+}
+
+// Landing : page d'offre. Le noeud Service la rend citable sur la question
+// « qui accompagne une PME belge sur EcoVadis ». Aucun prix ici : ils vivent
+// dans les fiches tarifs, une seule source evite la derive.
+function ldLanding({ url, lang, name, description }) {
+  return ldJson([
+    {
+      "@type": "WebPage",
+      "@id": abs(url),
+      url: abs(url),
+      name,
+      description,
+      inLanguage: lang,
+      isPartOf: { "@id": `${site.url}/#website` },
+      about: ORG,
+      publisher: ORG,
+    },
+    {
+      "@type": "Service",
+      "@id": `${abs(url)}#service`,
+      name,
+      description,
+      serviceType: "EcoVadis assessment support",
+      provider: ORG,
+      inLanguage: lang,
+    },
+    wsNode(lang),
+    kb.jsonld.organization,
+    kb.jsonld.person,
+  ]);
 }
 
 export default function (eleventyConfig) {
@@ -69,6 +155,22 @@ export default function (eleventyConfig) {
     data.relatedItems = (data.related || [])
       .map((slug) => kb.bySlug[l] && kb.bySlug[l][slug])
       .filter(Boolean);
+  });
+
+  // Fabriques de JSON-LD accessibles depuis le front matter des gabarits.
+  eleventyConfig.addGlobalData("ld", { collection: ldCollection, landing: ldLanding });
+
+  // Landings : front matter YAML statique, donc pas d'eleventyComputed. Le
+  // graphe se pose ici, avant rendu.
+  eleventyConfig.addPreprocessor("landing-jsonld", "njk", (data) => {
+    const p = (data.page && data.page.inputPath) || "";
+    if (!/\/site\/(fr|nl|en)-landing\.njk$/.test(p)) return;
+    data.jsonldBlocks = ldLanding({
+      url: String(data.permalink).replace(/index\.html$/, ""),
+      lang: data.htmlLang,
+      name: data.title,
+      description: data.description,
+    });
   });
 
   // Fichiers machine servis à la racine de l'origine (url-plan §machine_files).

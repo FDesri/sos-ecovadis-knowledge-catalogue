@@ -8,6 +8,15 @@
     htmlLang: (d) => d.p.lang,
     description: (d) => d.i18n[d.p.lang].catalog_intro.slice(0, 150),
     altUrls: (d) => d.p.alt,
+    jsonldBlocks: (d) => d.ld.collection({
+      url: d.p.url,
+      lang: d.p.lang,
+      name: d.i18n[d.p.lang].all_topics,
+      description: d.i18n[d.p.lang].catalog_intro.slice(0, 150),
+      items: d.kb.hubs
+        .filter((h) => h.members[d.p.lang].length)
+        .map((h) => ({ url: h.path[d.p.lang], title: h.title[d.p.lang] })),
+    }),
   }
 }
 ---

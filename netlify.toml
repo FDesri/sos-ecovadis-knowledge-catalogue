@@ -91,15 +91,7 @@
       frame-src https://calendly.com https://*.calendly.com https://app.hubspot.com; \
       upgrade-insecure-requests"""
 
-    # ---------------------------------------------------------------------
-    # GARDE-FOU : tant que sos-ecovadis.com ne pointe pas sur ce projet, les
-    # pages portent un canonique que le moteur ne peut pas atteindre. Elles
-    # ne doivent donc pas être indexées sous *.netlify.app.
-    # À RETIRER (cette ligne seule) le jour où le domaine est branché.
-    # ---------------------------------------------------------------------
-    X-Robots-Tag = "noindex, nofollow"
-
-[[headers]]
+    [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"

@@ -540,13 +540,14 @@ footer.site .links { display: flex; flex-wrap: wrap; gap: 1.2rem; }
 .esgim .legal .attrib a { color: var(--esgim-polar); }
 .esgim .legal .attrib { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 1.1rem 1.3rem; color: var(--on-dark); font-size: .98rem; }
 
-/* — Bandeau de consentement : écrit, inerte jusqu'à l'étape 5 — */
+/* — Bandeau de consentement : couleurs en dur, car il s'affiche aussi hors .esgim — */
 .consent { position: fixed; inset-inline: 0; bottom: 0; z-index: 40; background: rgba(4,38,70,.96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,.12); padding: 1.1rem 0; }
 .consent .inner { display: flex; gap: 1.25rem; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-.consent p { font-size: .9rem; color: var(--on-dark-muted); max-width: 68ch; }
+.consent p { font-size: .9rem; color: #c9d6e4; max-width: 68ch; margin: 0; }
+.consent a { color: #8fc3e0; text-decoration: underline; }
 .consent .acts { display: flex; gap: .6rem; flex-wrap: wrap; }
-.consent button { font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; border-radius: 12px; padding: .55rem 1.1rem; border: 1px solid rgba(255,255,255,.25); background: transparent; color: var(--on-dark); }
-.consent button.ok { border: 0; color: #fff; background: var(--grad-brand); }
+.consent button { font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; border-radius: 12px; padding: .55rem 1.1rem; border: 1px solid rgba(255,255,255,.25); background: transparent; color: #eef4fb; }
+.consent button.ok { border: 0; color: #fff; background: linear-gradient(90deg, #06a88e 0%, #009fa0 30%, #1d70b6 70%, #283c7e 100%); }
 
 /* — Mouvement : un seul chargement orchestré — */
 .esgim .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }

@@ -17,7 +17,7 @@
   var ACTIF = /(^|\.)sos-ecovadis\.com$/.test(window.location.hostname);
   var PORTAIL = "9391878";
   // ID de mesure Google Analytics (Administration > Flux de données).
-  var GA_ID = "G-554730561";
+  var GA_ID = "G-FEV6BF2DZ0";
   var CLE = "sos-ecovadis-consentement";
 
   var bandeau = document.getElementById("consentement");

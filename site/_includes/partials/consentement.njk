@@ -1,5 +1,5 @@
-{#- Bandeau de consentement : ÉCRIT, INERTE. Il reste caché tant que
-    site/assets/js/tracking.js porte ACTIF = false (étape 5).
+{#- Bandeau de consentement : affiché par site/assets/js/tracking.js,
+    uniquement sur le domaine réel sos-ecovadis.com.
     Texte dans la langue de la page, depuis i18n[lang].landing. -#}
 {%- set cl = htmlLang | default('fr') -%}
 {%- set ct = i18n[cl].landing -%}

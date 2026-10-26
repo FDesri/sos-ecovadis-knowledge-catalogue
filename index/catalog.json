@@ -2707,6 +2707,7 @@
    "source": "esgim-proprietary",
    "reliability": "expert-drafted",
    "sources": [
+    "ecovadis-medals",
     "ecovadis-methodology",
     "efrag-vsme",
     "eu-csrd",
@@ -3218,7 +3219,8 @@
    "sources": [
     "ecovadis-360-watch",
     "ecovadis-medals",
-    "ecovadis-methodology"
+    "ecovadis-methodology",
+    "esgim-portfolio"
    ],
    "date_updated": "2026-08-27",
    "verified_at": "2026-08-27",
@@ -3769,7 +3771,8 @@
    "reliability": "expert-drafted",
    "sources": [
     "ecovadis-medals",
-    "ecovadis-methodology"
+    "ecovadis-methodology",
+    "esgim-portfolio"
    ],
    "date_updated": "2026-08-27",
    "verified_at": "2026-08-27",
@@ -9220,6 +9223,7 @@
    "source": "esgim-proprietary",
    "reliability": "expert-drafted",
    "sources": [
+    "ecovadis-medals",
     "ecovadis-methodology"
    ],
    "date_updated": "2026-08-27",
@@ -11500,6 +11504,7 @@
    "source": "esgim-proprietary",
    "reliability": "expert-drafted",
    "sources": [
+    "ecovadis-medals",
     "ecovadis-methodology"
    ],
    "date_updated": "2026-08-27",

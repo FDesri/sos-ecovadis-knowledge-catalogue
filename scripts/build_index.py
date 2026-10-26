@@ -133,7 +133,8 @@ def main():
     slugs_by_lang = {l: {} for l in LANGS + ["mul"]}
     errors, warnings = [], []
 
-    for root, _d, files in os.walk(CATALOG):
+    for root, dirs, files in os.walk(CATALOG):
+        dirs.sort()  # ordre de parcours fixe, identique sur tout OS / runner
         for f in sorted(files):
             if not f.endswith(".md"):
                 continue
@@ -210,6 +211,9 @@ def main():
                 "effective_status": "review_required" if retire else fm["status"],
                 "hubs": [], "languages": {},
             })
+            # Les sources d'un objet = l'union des sources de ses versions
+            # linguistiques (sinon le résultat dépend de la langue lue en premier).
+            obj["sources"] = sorted(set(obj["sources"]) | set(fm.get("sources") or []))
             # Un objet, trois fichiers : on retient la position la plus prudente.
             obj["indexable"] = obj["indexable"] and published
             if not published and fm["status"] == "published":
